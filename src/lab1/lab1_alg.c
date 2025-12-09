@@ -1,13 +1,7 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-
-#define max_code_length 100
-#define green "\033[95m"
-#define reset "\033[0m"
-
-int is_function_header(const char *line);
-void print_header(char *line);
+#include "lab1.h"
 
 int comment_flag = 0;
 const char *datatypes[] = {"void",  "char",           "unsigned char", "signed char",
@@ -16,31 +10,7 @@ const char *datatypes[] = {"void",  "char",           "unsigned char", "signed c
                            "float", "double",         "long double",   "const"};
 const int datalen = 16;
 
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        printf("Usage: %s <filename.c>", argv[0]);
-        return 1;
-    }
-
-    char buffer[max_code_length];
-    FILE *file = fopen(argv[1], "rt");
-
-    if (!file) {
-        printf("n/a");
-        return 0;
-    }
-    while (fgets(buffer, max_code_length, file)) {
-        if (is_function_header(buffer)) {
-            print_header(buffer);
-        } else {
-            printf("%s", buffer);
-        }
-    }
-
-    fclose(file);
-}
-
-int is_function_header(const char *line) {
+static int is_function_header(const char *line) {
     if (strstr(line, "/*")) comment_flag = 1;
     if (strstr(line, "*/")) comment_flag = 0;
     if (strstr(line, "//") || comment_flag) return 0;
@@ -70,7 +40,7 @@ int is_function_header(const char *line) {
     return 1;
 }
 
-void print_header(char *line) {
+static void print_header(char *line) {
     for (char *p = line; *p != '\0'; p++) {
         if (*p != '{') {
             printf("%s%c%s", green, *p, reset);
@@ -80,3 +50,25 @@ void print_header(char *line) {
     }
     printf("%s", reset);
 }
+
+
+int lab1(char* filename) { 
+    char buffer[max_code_length];
+    FILE *file = fopen(filename, "rt");
+
+    if (!file) {
+        printf("n/a\n");
+        return 1;
+    }
+    while (fgets(buffer, max_code_length, file)) {
+        if (is_function_header(buffer)) {
+            print_header(buffer);
+        } else {
+            printf("%s", buffer);
+        }
+    }
+
+    fclose(file);
+    return 0;
+}
+
