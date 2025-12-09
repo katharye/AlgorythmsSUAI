@@ -7,39 +7,14 @@ typedef struct node {
     struct node *next; 
 } node;
 
-node* create_node(int d);
-node* fill_linked_list();
+//static node* create_node(int d);
+//static node* fill_linked_list();
+//static void print_linked_list(node* head);
+//static int find_repeat_nodes(node* head, int data);
+//static void delete_node(node** head, node* node_to_remove);
+//static void delete_linked_list(node** head);
 
-void print_linked_list(node* head);
-int find_repeat_nodes(node* head, int data);
-
-void delete_node(node** head, node* node_to_remove);
-void delete_linked_list(node** head);
-
-int main() {
-    node *head = fill_linked_list();
-    if (!head) {
-        printf("n/a\n");
-        return 1;
-    }
-
-    printf("Source array: ");
-    print_linked_list(head);
-    
-    node *tmp = head;
-    while (tmp != NULL) {
-        node *next_node = tmp->next; 
-        if (!find_repeat_nodes(head, tmp->data)) delete_node(&head, tmp);
-        tmp = next_node;
-    }
-
-    printf("Result array: ");
-    print_linked_list(head);
-
-    delete_linked_list(&head);
-}
-
-void delete_node(node** head, node* node_to_remove) {
+static void delete_node(node** head, node* node_to_remove) {
     if(*head == node_to_remove) {
         *head = node_to_remove->next;
         free(node_to_remove);
@@ -56,7 +31,7 @@ void delete_node(node** head, node* node_to_remove) {
     free(node_to_remove);
 }
 
-node* fill_linked_list() {
+static node* fill_linked_list() {
     node *head = NULL, *tmp = NULL;
     int num;
     char ch;
@@ -101,7 +76,7 @@ node* fill_linked_list() {
 
     return head;
 }
-void print_linked_list(node* head) {
+static void print_linked_list(node* head) {
     node* ptr = head;
     while (ptr != NULL) {
         const char* format_str = ptr->next == NULL ? "%d" : "%d,  ";
@@ -110,7 +85,7 @@ void print_linked_list(node* head) {
     }
     printf("\n");
 }
-node* create_node(int d) {
+static node* create_node(int d) {
     node *newnode = malloc(sizeof(node));
     newnode->data = d;
     newnode->next = NULL;
@@ -118,7 +93,7 @@ node* create_node(int d) {
     return newnode;
 }
 
-int find_repeat_nodes(node* head, int data) {
+static int find_repeat_nodes(node* head, int data) {
     node *ptr = head;
     int count = 0;
 
@@ -134,8 +109,33 @@ int find_repeat_nodes(node* head, int data) {
     return 0;
 }
 
-void delete_linked_list(node** head) {
+static void delete_linked_list(node** head) {
     while (*head != NULL) {
         delete_node(head, *head);
     }
+}
+
+int main() {
+    node *head = fill_linked_list();
+    if (!head) {
+        printf("n/a\n");
+        return 1;
+    }
+
+    printf("Source array: ");
+    print_linked_list(head);
+    
+    node *tmp = head;
+    while (tmp != NULL) {
+        node *next_node = tmp->next; 
+        if (!find_repeat_nodes(head, tmp->data)) delete_node(&head, tmp);
+        tmp = next_node;
+    }
+
+    printf("Result array: ");
+    print_linked_list(head);
+
+    delete_linked_list(&head);
+
+    return 0;
 }
