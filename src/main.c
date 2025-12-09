@@ -3,6 +3,8 @@
 
 #include "lab1/lab1.h"
 #include "lab2/lab2.h"
+#include "lab3/lab3.h"
+
 
 void clear();
 void print_quest(char* filename);
@@ -33,13 +35,19 @@ int main() {
 
         lab2();
         break;
+    case 3:
+        clear();
+        print_quest("lab3/quest.txt");
 
+        lab3();
+        break;
+        
     default:
         printf("Incorrect number!\n");
         return 1;
     }
     
-    
+
     printf("\n\nCheck another lab? (Y, n)");
     
 }
