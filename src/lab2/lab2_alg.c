@@ -5,29 +5,7 @@ int all_good = 1;
 int *arr = NULL;
 int size = 0;
 
-void input_mode();
-void std_in();
-void random_in();
-void file_in();
-
-void sort_mode();
-void bubble_sort();
-void selection_sort();
-
-int main() {
-
-    input_mode();
-    if (!all_good) {
-        if(arr) free(arr); 
-        return 1;
-    } 
-    
-    
-    if(arr) free(arr); 
-    return 0;
-}
-
-void input_mode() {
+static void input_mode() {
     int choice;
 
     printf("Choose sorting mode (1 - standard input, 2 - random, 3 - file): ");
@@ -48,7 +26,8 @@ void input_mode() {
             break;
     } 
 }
-void std_in() {
+
+static void std_in() {
     if (arr != NULL) {
         free(arr);
         arr = NULL;
@@ -84,7 +63,8 @@ void std_in() {
 
     sort_mode();
 }
-void random_in() {
+
+static void random_in() {
     char ch;
 
     if (arr != NULL) {
@@ -120,7 +100,8 @@ void random_in() {
 
     sort_mode();
 }
-void file_in() {
+
+static void file_in() {
     if (arr != NULL) {
         free(arr);
         arr = NULL;
@@ -176,7 +157,8 @@ void file_in() {
     sort_mode();
 }
 
-void sort_mode() {
+
+static void sort_mode() {
     int choice;
 
     printf("Choose sorting mode (1 - bubble sort or 2 - selection sort): ");
@@ -196,7 +178,8 @@ void sort_mode() {
     }
     printf("\n");
 }
-void bubble_sort() {
+
+static void bubble_sort() {
     int help;
 
     for (int i = 0; i < size - 1; i++) {
@@ -209,7 +192,8 @@ void bubble_sort() {
         }
     }
 }
-void selection_sort() {
+
+static void selection_sort() {
     int min, help ; 
 
     for (int i = 0; i < size - 1; i++) {
@@ -227,4 +211,19 @@ void selection_sort() {
             arr[min] = help;
         }
     }
+}
+
+
+int lab2() {
+
+    input_mode();
+    if (!all_good) {
+        if(arr) free(arr);
+        printf("n/a\n"); 
+        return 1;
+    } 
+    
+    
+    if(arr) free(arr); 
+    return 0;
 }
