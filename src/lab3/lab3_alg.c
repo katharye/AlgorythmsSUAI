@@ -7,12 +7,12 @@ typedef struct node {
     struct node *next; 
 } node;
 
-//static node* create_node(int d);
-//static node* fill_linked_list();
-//static void print_linked_list(node* head);
-//static int find_repeat_nodes(node* head, int data);
-//static void delete_node(node** head, node* node_to_remove);
-//static void delete_linked_list(node** head);
+static node* create_node(int d);
+static node* fill_linked_list();
+static void print_linked_list(node* head);
+static int find_repeat_nodes(node* head, int data);
+static void delete_node(node** head, node* node_to_remove);
+static void delete_linked_list(node** head);
 
 static void delete_node(node** head, node* node_to_remove) {
     if(*head == node_to_remove) {
@@ -116,6 +116,7 @@ static void delete_linked_list(node** head) {
 }
 
 int lab3() {
+    printf("Enter array: ");
     node *head = fill_linked_list();
     if (!head) {
         printf("n/a\n");
