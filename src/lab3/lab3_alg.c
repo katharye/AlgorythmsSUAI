@@ -115,7 +115,7 @@ static void delete_linked_list(node** head) {
     }
 }
 
-int main() {
+int lab3() {
     node *head = fill_linked_list();
     if (!head) {
         printf("n/a\n");
