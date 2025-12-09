@@ -5,6 +5,14 @@ int all_good = 1;
 int *arr = NULL;
 int size = 0;
 
+static void input_mode();
+static void std_in();
+static void random_in();
+static void file_in();
+static void bubble_sort();
+static void sort_mode();
+static void selection_sort();
+
 static void input_mode() {
     int choice;
 
