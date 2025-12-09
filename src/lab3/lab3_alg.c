@@ -1,11 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-
-typedef struct node {
-    int data;
-    struct node *next; 
-} node;
+#include "lab3.h"
 
 static node* create_node(int d);
 static node* fill_linked_list();
