@@ -32,7 +32,7 @@ int main() {
         char filename[256];
 
         clear();
-        print_quest("lab1/quest.txt");
+        print_quest("src/lab1/quest.txt");
 
         printf("Enter file name: ");
         scanf("%255s", filename);
@@ -40,27 +40,27 @@ int main() {
         break;
     case 2:
         clear();
-        print_quest("lab2/quest.txt");
+        print_quest("src/lab2/quest.txt");
 
         lab2();
         break;
     case 3:
         clear();
-        print_quest("lab3/quest.txt");
+        print_quest("src/lab3/quest.txt");
 
         lab3();
         break;
     case 4:
         clear();
-        print_quest("lab4/quest.txt");
+        print_quest("src/lab4/quest.txt");
 
-        lab4("lab4/input.txt");
+        lab4("src/lab4/input.txt");
         break;
     case 5:
         clear();
-        print_quest("lab5/quest.txt");
+        print_quest("src/lab5/quest.txt");
 
-        lab5("lab5/graph.txt");
+        lab5("src/lab5/graph.txt");
         break;
     default:
         printf("Incorrect number!\n");
