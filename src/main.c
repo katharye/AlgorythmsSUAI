@@ -35,7 +35,7 @@ int main() {
         print_quest("lab1/quest.txt");
 
         printf("Enter file name: ");
-        scanf("%s", &filename);
+        scanf("%255s", filename);
         lab1(filename);
         break;
     case 2:
