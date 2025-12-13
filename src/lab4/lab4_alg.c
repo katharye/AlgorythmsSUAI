@@ -1,33 +1,21 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "lab4.h"
 
-#define true 1
-#define false 0
 
-struct Trunk {
-    struct Trunk* prev;
-    char* str;
-};
+static struct Node* createNode(int key);
+static struct Node* insertNode(struct Node* root, int key); 
+static void deleteLeavesAtLevel(struct Node** root, int targetLevel, int currentLevel); 
+static void showTrunks(struct Trunk* p);
+static void printTree(struct Node* root, struct Trunk* prev, int isLeft);
+static void freeTree(struct Node** root);
 
-struct Node {     
-    int key;            
-    struct Node* left;  
-    struct Node* right; 
-};
-
-struct Node* createNode(int key);
-struct Node* insertNode(struct Node* root, int key); 
-void deleteLeavesAtLevel(struct Node** root, int targetLevel, int currentLevel); 
-void showTrunks(struct Trunk* p);
-void printTree(struct Node* root, struct Trunk* prev, int isLeft);
-void freeTree(struct Node** root);
-
-int main() {
+int lab4(char* path) {
     struct Node* root = NULL;
     int key;
     FILE *file;
 
-    file = fopen("input.txt", "r");
+    file = fopen(path, "r");
     if (file == NULL) {
         printf("Ошибка открытия файла input.txt\n");
         return 1;
@@ -63,7 +51,7 @@ int main() {
     return 0;
 }
 
-void deleteLeavesAtLevel(struct Node** root, int targetLevel, int currentLevel) {
+static void deleteLeavesAtLevel(struct Node** root, int targetLevel, int currentLevel) {
     if (*root != NULL) {
         if (currentLevel == targetLevel) {
             if ((*root)->left == NULL && (*root)->right == NULL) {
@@ -78,7 +66,7 @@ void deleteLeavesAtLevel(struct Node** root, int targetLevel, int currentLevel) 
     }
 }
 
-struct Node* insertNode(struct Node* root, int key) {
+static struct Node* insertNode(struct Node* root, int key) {
     if (root == NULL) {
         root =  createNode(key);
     } else if (key < root->key) {
@@ -89,7 +77,7 @@ struct Node* insertNode(struct Node* root, int key) {
     return root;
 }
 
-struct Node* createNode(int key) {
+static struct Node* createNode(int key) {
     struct Node* node = (struct Node*)malloc(sizeof(struct Node));
     node->key = key;
     node->left = NULL;
@@ -97,7 +85,7 @@ struct Node* createNode(int key) {
     return node;
 }
 
-void freeTree(struct Node** root) {
+static void freeTree(struct Node** root) {
     if (*root != NULL) {   
         freeTree(&(*root)->left);
         freeTree(&(*root)->right);
@@ -109,7 +97,7 @@ void freeTree(struct Node** root) {
 
 
 
-void showTrunks(struct Trunk* p) {
+static void showTrunks(struct Trunk* p) {
     if (p == NULL) {
         return;
     }
@@ -118,7 +106,7 @@ void showTrunks(struct Trunk* p) {
     printf("%s", p->str);
 }
 
-void printTree(struct Node* root, struct Trunk* prev, int isLeft) {
+static void printTree(struct Node* root, struct Trunk* prev, int isLeft) {
     if (root == NULL) {
         return;
     }
